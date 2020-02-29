@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fly_with_ease/Loader.dart';
 import 'package:fly_with_ease/apicaller.dart';
 
 
@@ -59,7 +60,10 @@ class MyHomePageState extends State<MyHomePage> {
             Card(
               child: Text("top"),
             ),
-            Text(_data == null ? "TEST" : _data.departure["actualTimeLocal"] + "")
+            Card(child: _data==null?ColorLoader4():Text(_data.departure["actualTimeLocal"] + ""))
+            
+            
+            
             
             // Container(child: Data(), height: 100,)
           ],
