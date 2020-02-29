@@ -33,7 +33,7 @@ class MyHomePageState extends State<MyHomePage> {
     super.initState();
     caller.fetchAero().then((data) {
       _data = data;
-      // setState(() {});
+       setState(() {});
     });
   }
 
