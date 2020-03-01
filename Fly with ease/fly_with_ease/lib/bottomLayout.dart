@@ -68,7 +68,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Departure Airport: \n\n" , _data.departure["airport"]["iata"] +""),
+                      : TextPrinterHome("Arrival Airport: \n\n" , _data.arrival["airport"]["iata"] +""),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
