@@ -32,9 +32,9 @@ class Apicaller {
 }
 
 class Aero {
-  var Arrival;
+  var arrival;
   var departure;
-  Aero(this.Arrival, this.departure);
+  Aero(this.arrival, this.departure);
   factory Aero.fromJson(List<dynamic> json) {
     return (Aero(
       json[0]['arrival'],
@@ -42,6 +42,6 @@ class Aero {
     ));
   }
   toString() {
-    return Arrival.toString();
+    return arrival.toString();
   }
 }

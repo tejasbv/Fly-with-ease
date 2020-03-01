@@ -16,43 +16,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() {
-    return new MyHomePageState();
-  }
-}
-
-class MyHomePageState extends State<MyHomePage> {
-  Apicaller caller = new Apicaller();
-  Aero _data;
-
-  @override
-  void initState() {
-    super.initState();
-    caller.fetchAero().then((data) {
-      _data = data;
-      setState(() {});
-    });
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // full screen width and height
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    var padding = MediaQuery.of(context).padding;
-    // height without status and toolbar
-    double height3 = height- kToolbarHeight;
-
-    // if(data==null)
-    // {
-    //   call();
-    //   return Scaffold(
-    //     appBar: AppBar(
-    //       title: data==null?Text("peep"):Text("app"),
-    //     ));
-    // }
+    /**********************************************************/
+      // full screen width and height
+      double width = MediaQuery.of(context).size.width;
+      double height = MediaQuery.of(context).size.height;
+      var padding = MediaQuery.of(context).padding;
+      // height without status and toolbar
+      double height3 = height- kToolbarHeight;
+    //**********************************************************/
     return Scaffold(
         appBar: AppBar(
           title: Text("app"),
