@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import "package:url_launcher/url_launcher.dart";
 import 'package:fly_with_ease/pages/HomePage.dart';
 
 class Search extends StatefulWidget {
@@ -11,6 +11,12 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+
+  openURL()
+  {
+      var url  ="https://www.facebook.com";
+      launch(url);
+  }
   DateTime _date;
   String Flightnumber = "";
   void selectDate(BuildContext context) async {
@@ -108,9 +114,9 @@ class _SearchState extends State<Search> {
                 ],
               ),
               RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>HomePage(Flightnumber, _date.toString().substring(0, 10))));
-                },
+                onPressed: openURL,//() {
+                 // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>HomePage(Flightnumber, _date.toString().substring(0, 10))));
+                //},
                 child: Text("search"),
               )
             ],
