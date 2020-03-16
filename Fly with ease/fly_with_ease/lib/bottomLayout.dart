@@ -6,7 +6,8 @@ import 'apicaller.dart';
 
 class BottomLayout extends StatefulWidget {
   double _height, _width;
-  BottomLayout(height, width) {
+  String flightnumber, date;
+  BottomLayout(height, width, this.flightnumber, this.date ) {
     this._width = width - 35;
     this._height = height - 55;
   }
@@ -14,27 +15,29 @@ class BottomLayout extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return new BottomLayoutState(_height, _width);
+    return new BottomLayoutState(_height, _width, this.flightnumber, this.date );
   }
 }
 
 class BottomLayoutState extends State<BottomLayout> {
-  Apicaller caller = new Apicaller();
+  String flightnumber, date;
+
+  double _height, _width;
+  BottomLayoutState(height, width, this.flightnumber, this.date ) {
+    this._width = width;
+    this._height = height;
+  }
+  Apicaller caller ;
   Aero _data;
 
   @override
   void initState() {
+    caller = new Apicaller(flightnumber, date);
     super.initState();
     caller.fetchAero().then((data) {
       _data = data;
       setState(() {});
     });
-  }
-
-  double _height, _width;
-  BottomLayoutState(height, width) {
-    this._width = width;
-    this._height = height;
   }
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Departure Airport: \n\n" , _data.departure["airport"]["iata"] +""),
+                      : TextPrinterHome("Scheduled Time Local: \n\n" , (_data.departure["scheduledTimeLocal"]).toString().substring(10,16) +""),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),

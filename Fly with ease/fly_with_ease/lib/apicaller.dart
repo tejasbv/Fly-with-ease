@@ -4,7 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class Apicaller {
-  Apicaller() {
+  String flightnumber, date;
+  String url =
+      "https://aerodatabox.p.rapidapi.com/flights/";
+  Apicaller(this.flightnumber, this.date) {
+    url+=flightnumber+"/"+date;
     getInfo();
   }
 
@@ -15,8 +19,7 @@ class Apicaller {
     });
   }
 
-  String url =
-      "https://aerodatabox.p.rapidapi.com/flights/DL47/2019-08-29?withLocation=false&withAircraftImage=false";
+  
   Future<Aero> fetchAero() async {
     final response = await http.get(url, headers: {
       "x-rapidapi-host": "aerodatabox.p.rapidapi.com",
