@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fly_with_ease/Loader.dart';
 import 'package:fly_with_ease/textPrinter_home.dart';
-
+import "package:url_launcher/url_launcher.dart";
 import 'apicaller.dart';
 
 class BottomLayout extends StatefulWidget {
@@ -20,6 +20,10 @@ class BottomLayout extends StatefulWidget {
 }
 
 class BottomLayoutState extends State<BottomLayout> {
+  openURL(String url) {
+    
+    launch(url);
+  }
   String flightnumber, date;
 
   double _height, _width;
@@ -36,7 +40,7 @@ class BottomLayoutState extends State<BottomLayout> {
     super.initState();
     caller.fetchAero().then((data) {
       _data = data;
-      setState(() {});
+      setState(() {}); 
     });
   }
   @override
@@ -51,7 +55,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Departure Airport: \n\n" , _data.departure["airport"]["iata"] +""),
+                      : FlatButton(child: TextPrinterHome("Departure\nAirport: \n\n" , _data.departure["airport"]["iata"] +""), onPressed: () {openURL("https://www.google.com/maps/search/?api=1&query="+_data.departure["airport"]["iata"]+"+airport");},),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
@@ -71,7 +75,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Arrival Airport: \n\n" , _data.arrival["airport"]["iata"] +""),
+                      : TextPrinterHome("Arrival\nAirport: \n\n" , _data.arrival["airport"]["iata"] +""),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
