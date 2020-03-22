@@ -73,7 +73,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Total travel time: \n\n" , totalTravelTime.toString().substring(0,4)),
+                      : TextPrinterHome("Total travel\ntime: \n\n" , totalTravelTime.toString().substring(0,4)),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
@@ -83,7 +83,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Arrival\nAirport: \n\n" , _data.arrival["airport"]["iata"] +""),
+                      : FlatButton(child: TextPrinterHome("Arrival\nAirport: \n\n" , _data.arrival["airport"]["iata"] +""), onPressed: () {openURL("https://www.google.com/maps/search/?api=1&query="+_data.arrival["airport"]["iata"]+"+airport");},),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
@@ -141,7 +141,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Departure Airport: \n\n" , _data.departure["airport"]["iata"] +""),
+                      : IconButton(icon: Icon(Icons.local_taxi), onPressed: (){openURL("uber://?client_id=<CLIENT_ID>&action=setPickup&pickup[nickname]=my_location&dropoff[latitude]=37.802374&dropoff[longitude]=-122.405818&dropoff[nickname]="+_data.departure["airport"]["iata"]+"+airport"+"%20airport&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d&link_text=View%20team%20roster&partner_deeplink=partner%3A%2F%2Fteam%2F9383");},iconSize: 100,),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
