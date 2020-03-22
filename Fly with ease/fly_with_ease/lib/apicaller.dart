@@ -6,9 +6,10 @@ import 'package:http/http.dart' as http;
 class Apicaller {
   String flightnumber, date;
   String url =
-      "https://aerodatabox.p.rapidapi.com/flights/";
+      "http://api.aviationstack.com/v1/flights?access_key=76a41990b70745202d464448c06a8648&airline_iata=aa&flight_number=2157";
   Apicaller(this.flightnumber, this.date) {
-    url+=flightnumber+"/"+date;
+    //aa&flight_number=2157
+    url+=flightnumber.substring(0,2)+"&flight_number="+flightnumber.substring(2);
     getInfo();
   }
 
@@ -21,13 +22,10 @@ class Apicaller {
 
   
   Future<Aero> fetchAero() async {
-    final response = await http.get(url, headers: {
-      "x-rapidapi-host": "aerodatabox.p.rapidapi.com",
-      "x-rapidapi-key": "4a4e824657mshab2b5ac6d6b10cbp144f5bjsn0679b5b8ef15"
-    });
+    final response = await http.get(url,);
 
     if (response.statusCode == 200) {
-      return Aero.fromJson(json.decode(response.body));
+      return Aero.fromJson(json.decode(response.body)["data"]);
     } else {
       throw Exception("api call invalid");
     }

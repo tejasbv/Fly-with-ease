@@ -26,6 +26,7 @@ dependencies:
   http: ^0.12.0+4
   url_launcher: 
   date_format:
+  fluttertoast:
 
 dev_dependencies:
   flutter_test:

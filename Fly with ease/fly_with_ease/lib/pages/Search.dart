@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:fly_with_ease/pages/HomePage.dart';
 
@@ -14,7 +15,7 @@ class _SearchState extends State<Search> {
   
 
   DateTime _date;
-  String Flightnumber = "";
+  String Flightnumber = null;
   void selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
@@ -132,12 +133,18 @@ class _SearchState extends State<Search> {
                   ),
                   RaisedButton(
                     onPressed: () {
+                      if(Flightnumber!=null && _date!=null)
+                      {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) => HomePage(
                                   Flightnumber,
                                   _date.toString().substring(0, 10))));
+                      }
+                      else{
+                        Fluttertoast.showToast(msg: "please enter flight number and date",);
+                      }
                     },
                     child: Text("search"),
                   )
