@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fly_with_ease/Loader.dart';
-import 'package:fly_with_ease/apicaller.dart';
 import 'package:fly_with_ease/pages/Search.dart';
 
 import 'bottomLayout.dart';

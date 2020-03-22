@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fly_with_ease/Loader.dart';
 import 'package:fly_with_ease/textPrinter_home.dart';
 import "package:url_launcher/url_launcher.dart";
+import 'package:date_format/date_format.dart';
 import 'apicaller.dart';
 
 class BottomLayout extends StatefulWidget {
@@ -20,6 +21,7 @@ class BottomLayout extends StatefulWidget {
 }
 
 class BottomLayoutState extends State<BottomLayout> {
+  
   openURL(String url) {
     
     launch(url);
@@ -33,14 +35,20 @@ class BottomLayoutState extends State<BottomLayout> {
   }
   Apicaller caller ;
   Aero _data;
-
+  Duration totalTravelTime;
   @override
   void initState() {
     caller = new Apicaller(flightnumber, date);
     super.initState();
     caller.fetchAero().then((data) {
       _data = data;
-      setState(() {}); 
+      setState(() {
+        DateTime deptTime = DateTime.parse(""+_data.departure["scheduledTimeUtc"].toString());
+        DateTime arrTime =  DateTime.parse(""+_data.arrival["scheduledTimeUtc"].toString());
+        print(""+deptTime.toString());
+        print(""+arrTime.toString());
+        totalTravelTime = arrTime.difference(deptTime);
+      }); 
     });
   }
   @override
@@ -65,7 +73,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Scheduled Time Local: \n\n" , (_data.departure["scheduledTimeLocal"]).toString().substring(10,16) +""),
+                      : TextPrinterHome("Total travel time: \n\n" , totalTravelTime.toString().substring(0,4)),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
@@ -89,13 +97,13 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Departure Airport: \n\n" , _data.departure["airport"]["iata"] +""),
+                      : TextPrinterHome("Departure Time Local: \n\n" , (_data.departure["scheduledTimeLocal"]).toString().substring(10,16) +""),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
-                elevation: 7,
+                elevation: 7, 
               ),
-              Card(
+              Card( 
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
@@ -109,7 +117,7 @@ class BottomLayoutState extends State<BottomLayout> {
                 child: Container(
                   child: _data == null
                       ? ColorLoader4()
-                      : TextPrinterHome("Departure Airport: \n\n" , _data.departure["airport"]["iata"] +""),
+                      : TextPrinterHome("Arrival Time Local: \n\n" , (_data.arrival["scheduledTimeLocal"]).toString().substring(10,16) +""),
                   height: this._height / 3,
                   width: this._width / 3,
                 ),
